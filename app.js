@@ -26,7 +26,7 @@ const app = Vue.createApp({
       return { width: this.playerHealth + "%" };
     },
     mayUseSpecialAttack() {
-      return this.currentRound % 3 !== 0;
+      return this.currentRound % 3 === 0;
     },
   },
   watch: {
@@ -59,6 +59,8 @@ const app = Vue.createApp({
     },
     attackMonster() {
       this.currentRound++;
+      console.log(this.mayUseSpecialAttack);
+      console.log(this.currentRound % 3);
       if (this.monsterHealth < this.playerHealth) {
         this.healMonster();
       } else if (this.mayUseSpecialAttack) {
@@ -69,7 +71,6 @@ const app = Vue.createApp({
       const attackValue = getRandomValue(1, 15);
       this.monsterHealth -= attackValue;
       this.addLogMessage("player", "attack", attackValue);
-      console.log(this.mayUseSpecialAttack);
     },
     attackPlayer() {
       const attackValue = getRandomValue(1, 15);
